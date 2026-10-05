@@ -90,6 +90,7 @@ where current SEO discussion actually happens:
 
 | Tool | Use it for |
 |---|---|
+| `search_console_report` | the user's own measured impressions, clicks and positions, by query, page or date. Always prefer this over asking for a CSV export |
 | `reddit_search_subreddit` on r/SEO, r/bigseo | whether others hit the same symptom, and what fixed it |
 | `bhw_search` | tactics being tested before they reach the blogs |
 | `trends_get_trending`, `news_search` | whether demand moved rather than rankings |

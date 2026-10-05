@@ -56,18 +56,26 @@ export const WORKFLOWS = [
         title: 'Search Console audit',
         description: 'Turn a Google Search Console export into a ranked fix list: striking distance, cannibalisation, decay and click-through gaps. Works from measured data, not estimates.',
         args: [
+            { name: 'site', description: 'Domain to audit, e.g. example.com. Pulls live data when a Search Console tool is connected', required: false },
             { name: 'focus', description: 'Limit to a section or path, e.g. /blog', required: false },
+            { name: 'days', description: 'Window in days, default 90', required: false },
             tongue, region
         ],
-        build: (a) => `Act as a search analyst working from the user's own Google Search Console export. Those are measured numbers, so never replace a figure in the file with one of your own.
+        build: (a) => `Act as a search analyst working from the user's own Google Search Console data. Those are measured numbers, so never replace one with a figure of your own.
 
-If no export has been provided, stop and ask for one, naming the exact path: Search Console, Performance, Search results, set the range to the last 3 months, open the Queries tab and export CSV, then do the same on the Pages tab, and attach both.
+Get the data before anything else, in this order.
 
-${v(a, 'focus') ? `Only consider rows under: ${v(a, 'focus')}` : 'Consider the whole export.'}
+1. If a Search Console tool is available, such as MCP Browser's search_console_report, call it and say in one line that you are working from live data. Pull by query and by page, over ${v(a, 'days') || '90'} days${v(a, 'site') ? `, for site ${v(a, 'site')}` : ', asking which site if it was not named'}. Sections below need position and impressions per query and per page, so pull whatever dimensions give you that.
+2. If no such tool is connected but a file has been attached, work from the attachment and say so.
+3. If neither, stop and ask, naming the exact path: Search Console, Performance, Search results, set the range to the last 3 months, open the Queries tab and export CSV, then do the same on the Pages tab, and attach both.
+
+${v(a, 'focus') ? `Only consider rows under: ${v(a, 'focus')}` : 'Consider everything in range.'}
 
 ${locale(v(a, 'region'))}
 
 Answer in ${v(a, 'tongue')}, each section as its own table.
+
+Open with clicks, before anything else. Average position and click-through rate both rise on their own when impressions fall, because the queries you ranked eightieth for stop being shown and leave the average behind them. So state plainly whether clicks went up or down over the window, then read position and CTR against the impression base rather than beside it. A position gain on collapsing impressions is not a win until you can point at a page that actually moved. Never file a metric under "improved" when clicks fell.
 
 1. One push from page one. Rows between position 11 and 30 that collect impressions and almost no clicks. Score by impressions multiplied by the distance to position 10 and order by that score. For each, name the single change most likely to move it and why that one. Where a page is stuck rather than drifting, weigh a contextual internal link from the strongest page already ranking in that topic before anything heavier: it is the cheapest intervention that reliably moves a stalled page.
 
@@ -77,7 +85,7 @@ Answer in ${v(a, 'tongue')}, each section as its own table.
 
 4. Seen and skipped. Rows whose click-through rate is far below what their position should earn. Judge whether the cause is the title, the snippet or an answer box absorbing the click, and write a replacement title and meta description for the worst five.
 
-Quote the real figures rather than describing them vaguely, never invent a row, and if a section needs a column the export lacks, name the missing column and skip it.
+Quote the real figures rather than describing them vaguely, never invent a row, and if a section needs a dimension you could not retrieve, name what is missing and skip that section.
 
 ${START_HERE}`
     },
@@ -110,7 +118,7 @@ Answer in ${v(a, 'tongue')}. Say for each step whether it is ruled in, ruled out
 
 4. Did we get hit. Only now consider a core or spam update, a manual action, or a link attack. Check what was actually confirmed around that date rather than assuming the dates line up. Searching r/SEO or r/bigseo for that week is often the fastest test: if many sites moved on that date it is an update, if nobody did it is this site.
 
-5. Did demand move. Separate a ranking loss from a loss of searches. The same position against a shrinking query, and clicks lost to an answer panel while impressions hold, look identical on a traffic chart and need opposite responses.
+5. Did demand move. Separate a ranking loss from a loss of searches. The same position against a shrinking query, and clicks lost to an answer panel while impressions hold, look identical on a traffic chart and need opposite responses. If a Search Console tool is available, such as MCP Browser's search_console_report, pull the window around the drop by date and by query and settle this from the numbers rather than reasoning about it.
 
 For each cause ruled in, say what recovery looks like and how long it realistically takes. Be honest where recovery is slow or uncertain. Nothing generic: every item points at something you observed or are explicitly asking the user to look up.
 

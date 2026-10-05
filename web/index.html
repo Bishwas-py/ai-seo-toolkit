@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI SEO Toolkit for Claude and ChatGPT | Webmatrices</title>
-<meta name="description" content="Eight AI SEO tools for Claude and ChatGPT: audit your Search Console export, diagnose traffic drops, cluster keywords, get cited by AI. Free, one-click install.">
+<meta name="description" content="Eight AI SEO tools for Claude and ChatGPT. Reads your real Search Console data and tells you what to fix first. Free, open source.">
 <link rel="canonical" href="https://webmatrices.com/seo-toolkit">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
@@ -56,7 +56,7 @@
         {
           "@type": "Question",
           "name": "Where does the data come from if there is no SEO database?",
-          "acceptedAnswer": { "@type": "Answer", "text": "From your own Google Search Console export, which is free and measured. The Search Console audit reads that file directly. Anywhere a figure cannot be retrieved it is labelled a guess, so you always know which half of the answer you are reading." }
+          "acceptedAnswer": { "@type": "Answer", "text": "From your own Google Search Console, which is free and measured. With MCP Browser connected the toolkit pulls the report directly through your signed-in session; otherwise it asks you to attach a CSV export. Anywhere a figure cannot be retrieved it is labelled a guess, so you always know which half of the answer you are reading." }
         },
         {
           "@type": "Question",
@@ -161,8 +161,8 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
   <a class="brandline" href="https://webmatrices.com">
     <img src="/favicon.svg" alt="" width="22" height="22">Webmatrices
   </a>
-  <h1>AI SEO tools that run inside Claude and ChatGPT</h1>
-  <p class="lede">Eight workflows built on your own Search Console data instead of invented numbers. One click to install, free, open source.</p>
+  <h1>AI SEO tools that read your real Search Console data</h1>
+  <p class="lede">Eight workflows built on measured numbers instead of invented ones. Ask what to fix first and get an answer from your own impressions, clicks and positions. Free, open source.</p>
 
   <div class="cta">
     <a class="btn btn-primary" href="https://claude.ai/customize/plugins">Add to Claude</a>
@@ -175,12 +175,16 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
 
 <p>Ask one for search volume and keyword difficulty and you get a confident table of figures that nothing measured. You then plan a quarter of work around them. It is the most common complaint about the whole category, and it is fair.</p>
 
-<p>This toolkit starts from the other end. Its main workflow reads an export of your own Google Search Console data, which is measured, free, and already yours. Anywhere a figure cannot be retrieved, it is labelled a guess. You always know which half of the answer you are reading.</p>
+<p>This toolkit starts from the other end. Its main workflow reads your own Google Search Console data, which is measured, free, and already yours. Anywhere a figure cannot be retrieved it is labelled a guess, so you always know which half of the answer you are reading.</p>
+
+<blockquote>read my recent Google Search Console improvements in webmatrices.com</blockquote>
+
+<p>With <a href="https://webmatrices.com/mcpbrowser">MCP Browser</a> connected, that is the entire interaction. It pulls the real report through your signed-in session, no export and no API key. Without it, the toolkit asks you to attach a CSV and works from that instead.</p>
 
 <h2>The eight tools</h2>
 
 <ul class="tools">
-  <li><strong>Search Console audit</strong><span>Attach your export. Get the pages one position from page one scored by opportunity, the queries where your own URLs compete with each other, the posts quietly losing clicks, and rewritten titles for results people see but never click.</span></li>
+  <li><strong>Search Console audit</strong><span>Name your domain. Get the pages one position from page one scored by opportunity, the queries where your own URLs compete with each other, the posts quietly losing clicks, and rewritten titles for results people see but never click.</span></li>
   <li><strong>Traffic drop diagnosis</strong><span>Rules things out in cost order. Starts with whether the page even renders for a crawler, which catches the JavaScript-shell problem that silently deindexes modern sites, and only reaches for "it was an update" once the mechanical causes are gone.</span></li>
   <li><strong>Keyword clustering</strong><span>A seed keyword becomes ten themes with long-tail terms, search intent, titles and meta descriptions in one table.</span></li>
   <li><strong>AI citation optimisation</strong><span>Get quoted by AI Overviews, AI Mode, ChatGPT search and Perplexity, from Google's published guidance rather than GEO folklore.</span></li>
@@ -224,9 +228,13 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
 
 <h2>Pair it with MCP Browser</h2>
 
-<p>Every workflow that touches a URL has to fetch the page and prove it read it. A plain HTTP fetch cannot tell a genuinely thin page from one that only looks empty to a fetcher, and that difference is the entire diagnosis when a site is rendering through JavaScript.</p>
+<p>It does three things the toolkit leans on.</p>
 
-<p><a href="https://webmatrices.com/mcpbrowser">MCP Browser</a> drives real Chrome using your signed-in session, so the toolkit can render JavaScript, fetch both ways and compare, and read the places SEO is actually discussed: Reddit, BlackHatWorld, Dev.to, forums behind a login. When you are diagnosing a drop, "did anyone else see this on the same date" is often the fastest way to separate a site problem from an algorithm one.</p>
+<p><strong>It reads Search Console directly.</strong> <code>search_console_report</code> pulls your impressions, clicks and positions by query, page or date through the session you are already signed into. That turns the audit from "export two CSVs and attach them" into naming your domain.</p>
+
+<p><strong>It renders JavaScript.</strong> Every workflow that touches a URL must fetch the page and prove it read it. A plain HTTP fetch cannot tell a genuinely thin page from one that only looks empty to a fetcher, and that difference is the entire diagnosis when a site renders client-side. Fetching both ways and comparing is the fastest proof of a rendering problem.</p>
+
+<p><strong>It reads where SEO is actually discussed.</strong> Reddit, BlackHatWorld, Dev.to, forums behind a login. When you are diagnosing a drop, "did anyone else see this on the same date" separates a site problem from an algorithm one faster than any tool.</p>
 
 <pre><code>brew install --cask bishwas-py/tap/mcpbrowser</code></pre>
 
@@ -238,7 +246,7 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
 <p>No. The toolkit sends instructions to whichever AI client you already use, so the thinking runs on your existing Claude or ChatGPT plan. There is no account, no API key and no server. Free plans work.</p></details>
 
 <details><summary>Where does the data come from if there is no SEO database?</summary>
-<p>From your own Google Search Console export, which is free and measured. The Search Console audit reads that file directly. Anywhere a figure cannot be retrieved it is labelled a guess.</p></details>
+<p>From your own Google Search Console, which is free and measured. With MCP Browser connected the toolkit pulls the report directly through your signed-in session; otherwise it asks you to attach a CSV export. Anywhere a figure cannot be retrieved it is labelled a guess, so you always know which half of the answer you are reading.</p></details>
 
 <details><summary>Which AI clients does it work with?</summary>
 <p>One install covers them all. Adding the plugin to your Claude account makes it available in chat on web, desktop and mobile, in Cowork, and in Claude Code, with no second setup. A Chrome extension separately covers claude.ai and chatgpt.com with a toolbar above the chat box.</p></details>

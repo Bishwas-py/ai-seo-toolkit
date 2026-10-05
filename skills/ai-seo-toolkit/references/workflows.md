@@ -13,11 +13,27 @@ ask about anything you can infer from the site itself.
 
 The highest-value workflow, and the only one working from measured data.
 
-Ask for an export of Google Search Console: Performance, Search results, last 3
-months, the Queries tab exported as CSV, then the same on the Pages tab. Both if
-possible. These are measured figures, so never replace one with an estimate.
+Get the data in this order. These are measured figures either way, so never
+replace one with an estimate.
 
-Work through four sections, each as its own table.
+1. **A Search Console tool, if one is connected.** MCP Browser exposes
+   `search_console_report`, which takes a site, a dimension and a window in
+   days. Pull by query and by page over the last 90 days and say in one line
+   that you are working from live data. This is the fast path and needs nothing
+   from the user but the domain.
+2. **An attached export,** if they gave you one.
+3. **Otherwise ask,** naming the exact path: Search Console, Performance, Search
+   results, last 3 months, Queries tab, Export CSV, then the same on Pages.
+
+Open with clicks, before anything else. Average position and click-through rate
+both rise on their own when impressions fall, because the queries they ranked
+eightieth for stop being shown and leave the average behind them. State plainly
+whether clicks went up or down, then read position and CTR against the
+impression base rather than beside it. A position gain on collapsing impressions
+is not a win until you can point at a page that actually moved, and no metric
+belongs under "improved" in a window where clicks fell.
+
+Then work through four sections, each as its own table.
 
 **1. One push from page one.** Rows between position 11 and 30 collecting
 impressions and almost no clicks. Score by impressions multiplied by the distance
