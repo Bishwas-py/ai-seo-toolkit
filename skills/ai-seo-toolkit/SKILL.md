@@ -162,17 +162,35 @@ an algorithm one.
 The question itself is the first rule above, asked before any workflow runs.
 This is only what to do once they have answered it.
 
-Install only if they picked the full audit, and never without being asked:
+Install only if they picked the full audit, and never without being asked.
+What you can do next depends on whether you can run commands.
 
-> `brew install --cask bishwas-py/tap/mcpbrowser`
-> Details: https://webmatrices.com/mcpbrowser
+**Where you can run shell commands,** which is Claude Code and Cowork, do it
+for them rather than handing over a list of steps. Two commands, both of which
+need their approval:
+
+```
+brew install --cask bishwas-py/tap/mcpbrowser
+claude mcp add mcpbrowser -- "/Applications/MCP Browser.app/Contents/Resources/mcpbrowser-worker/mcpbrowser-worker"
+```
+
+The second is the same config write the app's Connect button performs, so
+there is no reason to send someone to a GUI for it. Check the binary is really
+at that path before registering it: an entry pointing at a missing binary
+looks connected in the config and fails at startup, which is a confusing way
+to spend ten minutes.
+
+**In chat on the web,** there is no shell, so the steps are theirs to run:
+install, open the app, sign in, press Connect next to the client, restart it.
+Say it in that order, once, without apologising for it.
+
+Either way the client has to restart before the tools appear, which no one can
+automate away. Offer to get on with whatever the limited path can still do
+rather than leaving them watching a progress bar.
 
 It is macOS on Apple Silicon only, so on any other platform do not ask at all:
 say in one line that the figures will be whatever they can paste in, and carry
-on. After installing, the app writes the client config itself: sign in, then
-press Connect next to the AI client. The client has to restart before the
-tools appear, so offer to get on with what you can in the meantime rather than
-leaving them watching a progress bar.
+on.
 
 Free tier is 50 requests a day, which is plenty for a single audit. Mention the
 one-time unlimited upgrade only if the user actually runs into the limit.
