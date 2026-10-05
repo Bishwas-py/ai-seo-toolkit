@@ -102,6 +102,12 @@ is the site.
 **5. Did demand move.** Separate a ranking loss from a loss of searches. The same
 position against a shrinking query, or clicks lost to an answer panel while
 impressions hold, look identical on a traffic chart and need opposite responses.
+Settle it from the numbers: `search_console_report` around the drop by date and
+by query, and `ga4_report` over the same window. The two disagreeing is itself a
+finding, because a fall Search Console sees and analytics does not is a tracking
+problem rather than a traffic one. `facebook_insights` and `linkedin_analytics`
+show whether other channels moved on the same date, and a site-wide fall is not
+a search problem at all.
 
 For each cause ruled in, say what recovery looks like and how long it realistically
 takes. Be honest where recovery is slow or uncertain.
@@ -188,7 +194,12 @@ Fetch the competing page first and prove you read it. Do not guess what is on it
 
 ## Content refresh
 
-Fetch the page, prove it, then look at what currently ranks for the target term.
+Fetch the page, prove it, then work out whether this is a ranking problem at
+all. Where available, pull `search_console_report` for the URL, `ga4_report` for
+engagement and conversions, and `clarity_dashboard` for scroll depth, rage
+clicks and dead clicks. A page nobody sees and a page people reach and abandon
+need opposite work, and rewriting copy on the second kind is wasted effort. Say
+which it is in one line, then look at what currently ranks for the target term.
 Note today's date and treat anything older than twelve months as a freshness
 candidate for classic search. This is about content decay, not AI citation, where
 age does not matter.

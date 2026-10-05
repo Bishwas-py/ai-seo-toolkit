@@ -90,7 +90,10 @@ where current SEO discussion actually happens:
 
 | Tool | Use it for |
 |---|---|
-| `search_console_report` | the user's own measured impressions, clicks and positions, by query, page or date. Always prefer this over asking for a CSV export |
+| `search_console_report` | measured impressions, clicks and positions, by query, page or date. Always prefer this over asking for a CSV export |
+| `ga4_report` | what happened after the click: engagement, bounce, conversions. A page can rank well and still fail here, and that needs the opposite fix |
+| `clarity_dashboard` | rage clicks, dead clicks, scroll depth. Why a page with traffic is not converting |
+| `facebook_insights`, `linkedin_analytics` | whether a traffic change is search-specific or site-wide |
 | `reddit_search_subreddit` on r/SEO, r/bigseo | whether others hit the same symptom, and what fixed it |
 | `bhw_search` | tactics being tested before they reach the blogs |
 | `trends_get_trending`, `news_search` | whether demand moved rather than rankings |

@@ -118,7 +118,7 @@ Answer in ${v(a, 'tongue')}. Say for each step whether it is ruled in, ruled out
 
 4. Did we get hit. Only now consider a core or spam update, a manual action, or a link attack. Check what was actually confirmed around that date rather than assuming the dates line up. Searching r/SEO or r/bigseo for that week is often the fastest test: if many sites moved on that date it is an update, if nobody did it is this site.
 
-5. Did demand move. Separate a ranking loss from a loss of searches. The same position against a shrinking query, and clicks lost to an answer panel while impressions hold, look identical on a traffic chart and need opposite responses. If a Search Console tool is available, such as MCP Browser's search_console_report, pull the window around the drop by date and by query and settle this from the numbers rather than reasoning about it.
+5. Did demand move. Separate a ranking loss from a loss of searches. The same position against a shrinking query, and clicks lost to an answer panel while impressions hold, look identical on a traffic chart and need opposite responses. Settle it from the numbers rather than by reasoning: pull the window around the drop with search_console_report by date and by query, and if ga4_report is available pull the same window there. Two sources disagreeing is itself a finding, because a fall in Search Console that analytics does not see is a reporting or tracking problem rather than a traffic one. If facebook_insights or linkedin_analytics are available, check whether other channels moved on the same date, since a site-wide fall is not a search problem at all.
 
 For each cause ruled in, say what recovery looks like and how long it realistically takes. Be honest where recovery is slow or uncertain. Nothing generic: every item points at something you observed or are explicitly asking the user to look up.
 
@@ -255,6 +255,8 @@ ${proveFetch('Page to audit', v(a, 'url'))}
 Target term: ${v(a, 'target') || 'not given. Work it out from the page and state it in the snapshot.'}
 
 ${locale(v(a, 'region'))}
+
+Before judging the writing, work out whether this is a ranking problem at all. Where the tools are available, pull search_console_report for this URL, ga4_report for engagement and conversions, and clarity_dashboard for scroll depth, rage clicks and dead clicks. A page nobody sees and a page people arrive at and abandon need opposite work, and rewriting copy on the second kind is wasted effort. Say in one line which of the two this is before going further.
 
 Then look at what currently wins: the top five results and the answer panel for the target term in that market. Note today's date and treat anything on the page older than twelve months as a freshness candidate. This is content decay in classic search, not AI citation, where age does not matter.
 
