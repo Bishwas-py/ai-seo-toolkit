@@ -37,6 +37,52 @@ and Claude Code from one account. To pick up a new version later, run
 `/plugin update ai-seo-toolkit@webmatrices-seo`, or turn on auto-update for the
 marketplace.
 
+### Other clients
+
+The plugin carries two things, and they reach different places. The **skill**
+is the routing and the house rules, and it loads in Claude only. The **MCP
+server** carries each workflow's full procedure in the tool's own response, so
+it stands on its own anywhere it can run.
+
+| Client | Skill | Workflows | Notes |
+|---|---|---|---|
+| Claude Code | yes | yes | Everything, and the only place setup can be automated for you |
+| Claude Desktop, Cowork | yes | yes | Cowork runs the bundled server. For the tools in a plain chat, add the server by hand, below |
+| Codex | no | yes | Server only. The workflows are self-contained, so nothing is really lost |
+| ChatGPT | no | no | It will not launch a local server. See below |
+
+**Claude Desktop, by hand.** The bundled server runs in Cowork and Claude Code,
+not in a plain desktop chat. To get the workflows there, add it to
+`~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ai-seo": { "command": "npx", "args": ["-y", "ai-seo-toolkit"] }
+  }
+}
+```
+
+**Codex.** Either `codex mcp add ai-seo --command npx --args -y ai-seo-toolkit`,
+or write it into `~/.codex/config.toml` yourself:
+
+```toml
+[mcp_servers.ai-seo]
+command = "npx"
+args = ["-y", "ai-seo-toolkit"]
+```
+
+The skill does not load in Codex, so no workflow is chosen for you. Call the
+one you want by name and follow what it returns.
+
+**ChatGPT.** Not supported, and not through any flag. ChatGPT reaches MCP
+servers over HTTPS and never launches one on your machine, so a local stdio
+server is out of reach. Hosting this behind an HTTPS endpoint or OpenAI's
+Secure MCP Tunnel would work, and would also put the browsing and the Search
+Console session on a server rather than your own signed-in Chrome, which is
+most of why the numbers here are measured. The Chrome extension is the honest
+answer for ChatGPT.
+
 ## Pair with MCP Browser
 
 Every workflow that touches a URL must fetch the page and prove it read it. A
