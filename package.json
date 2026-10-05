@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "author": "Webmatrices",
-  "homepage": "https://webmatrices.com/seo-toolkit",
+  "homepage": "https://webmatrices.com/ai-seo-toolkit",
   "bin": { "ai-seo-toolkit": "server/index.js" },
   "keywords": ["ai seo", "seo", "mcp", "mcp-server", "search console", "gsc", "keyword research", "aeo", "geo", "schema", "claude", "chatgpt"],
   "repository": { "type": "git", "url": "git+https://github.com/bishwas-py/ai-seo-toolkit.git" },
@@ -13,8 +13,7 @@
   "scripts": {
     "start": "node server/index.js",
     "test": "node test.js",
-    "pack:mcpb": "npx -y @anthropic-ai/mcpb@latest pack . ai-seo-toolkit.mcpb",
-    "version": "node scripts/sync-version.mjs && git add manifest.json"
+    "version": "node scripts/sync-version.mjs && git add .claude-plugin/plugin.json"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.0"

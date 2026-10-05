@@ -7,7 +7,7 @@ on:
     tags: ['v*']
 
 permissions:
-  contents: write   # create the release and attach the bundle
+  contents: write   # create the GitHub release
   id-token: write   # OIDC, so npm needs no stored token
 
 jobs:
