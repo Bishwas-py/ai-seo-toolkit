@@ -141,4 +141,30 @@ await check('every workflow builds cleanly from its required arguments alone', a
     }
 });
 
+// --- release hygiene. These drift silently and ship a bundle labelled wrong.
+await check('package.json and manifest.json agree on the version', async () => {
+    const { readFileSync } = await import('node:fs');
+    const read = (f) => JSON.parse(readFileSync(`${import.meta.dirname}/${f}`, 'utf8'));
+    const pkg = read('package.json');
+    const manifest = read('manifest.json');
+    assert.strictEqual(manifest.version, pkg.version,
+        `manifest ${manifest.version} vs package ${pkg.version}`);
+    assert.strictEqual(manifest.name, pkg.name,
+        `manifest ${manifest.name} vs package ${pkg.name}`);
+});
+
+await check('the published package carries everything the server imports', async () => {
+    const { readFileSync } = await import('node:fs');
+    const pkg = JSON.parse(readFileSync(`${import.meta.dirname}/package.json`, 'utf8'));
+    const entry = pkg.bin[pkg.name];
+    assert.ok(entry, 'no bin entry under the package name');
+    assert.ok(pkg.files.some((f) => entry.startsWith(f)), `files does not cover ${entry}`);
+    const source = readFileSync(`${import.meta.dirname}/${entry}`, 'utf8');
+    assert.ok(source.startsWith('#!'), 'bin entry has no shebang, npx will not run it');
+    for (const local of [...source.matchAll(/from '(\.\/[^']+)'/g)].map((m) => m[1])) {
+        const path = local.replace('./', 'server/');
+        assert.ok(pkg.files.some((f) => path.startsWith(f)), `${path} is imported but not published`);
+    }
+});
+
 if (!process.exitCode) console.log(`ok  ${passed} checks passed`);

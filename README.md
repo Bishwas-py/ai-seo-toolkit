@@ -106,6 +106,29 @@ npx @anthropic-ai/mcpb pack .   # rebuild the .mcpb
 arguments once, and the server derives both the MCP prompt and the MCP tool from
 that declaration, so the two can never drift apart.
 
+## Release
+
+Two independent channels. npm serves the `npx` installs, the GitHub release
+serves the one-click `.mcpb`. Neither blocks the other, but the version lives in
+two files and the test suite fails if they disagree.
+
+```bash
+npm version patch                 # bumps package.json only
+# mirror the same number into manifest.json
+npm test                          # fails if the two disagree
+npm publish                       # npx -y ai-seo-toolkit now resolves
+
+npx @anthropic-ai/mcpb pack . ai-seo-toolkit.mcpb
+gh release create "v$(node -p "require('./package.json').version")" \
+  ai-seo-toolkit.mcpb \
+  --title "v$(node -p "require('./package.json').version")" \
+  --notes "One-click install for Claude Desktop. Download the .mcpb and double-click it."
+```
+
+The release asset is only downloadable by the public once the repository is
+public. While it is private, the download link on the landing page returns 404
+for everyone but you.
+
 The test suite asserts the MCP surface over a real stdio connection and checks
 the content guarantees, including that no workflow recommends a tactic Google
 has said does not work.
