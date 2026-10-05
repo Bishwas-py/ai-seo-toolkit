@@ -1,0 +1,21 @@
+{
+  "name": "ai-seo-toolkit",
+  "version": "1.0.0",
+  "description": "Eight SEO and AI-search workflows for Claude and ChatGPT: Search Console audit, traffic drop diagnosis, keyword clustering, AI citations, competitor gap, content refresh, schema markup, article drafts.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Webmatrices",
+  "homepage": "https://webmatrices.com/seo-toolkit",
+  "bin": { "ai-seo-toolkit": "server/index.js" },
+  "keywords": ["ai seo", "seo", "mcp", "mcp-server", "search console", "gsc", "keyword research", "aeo", "geo", "schema", "claude", "chatgpt"],
+  "repository": { "type": "git", "url": "git+https://github.com/bishwas-py/ai-seo-toolkit.git" },
+  "files": ["server", "ai-seo-toolkit", "README.md"],
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node test.js",
+    "pack:mcpb": "mcpb pack"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0"
+  }
+}
