@@ -38,7 +38,18 @@ jobs:
 
       # No NPM_TOKEN. npm verifies the OIDC identity against the trusted
       # publisher configured on the package, and attaches provenance itself.
-      - run: npm publish
+      #
+      # A version already on the registry is not an error. The first release
+      # was published by hand, because a trusted publisher can only be set on
+      # a package that exists, and a re-run of this job should not fail either.
+      - name: Publish to npm
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if npm view "ai-seo-toolkit@${version}" version >/dev/null 2>&1; then
+            echo "ai-seo-toolkit@${version} is already published, skipping"
+          else
+            npm publish
+          fi
 
       - name: Cut the release
         env:
