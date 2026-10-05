@@ -16,11 +16,32 @@ rather than invented numbers. MIT licensed.
 
 ## Install
 
-**Claude Desktop, one click.** Download `ai-seo-toolkit.mcpb` from
-[releases](https://github.com/bishwas-py/ai-seo-toolkit/releases) and
-double-click it.
+**As a plugin, recommended.** One install covers chat on web, desktop and
+mobile, Cowork, and Claude Code, and it updates itself from this repository.
 
-**Claude Code.**
+In claude.ai or the desktop app, go to **Customize > Plugins > Add > Add
+marketplace** and enter:
+
+```
+Bishwas-py/ai-seo-toolkit
+```
+
+Or from Claude Code:
+
+```bash
+/plugin marketplace add Bishwas-py/ai-seo-toolkit
+/plugin install ai-seo-toolkit@webmatrices
+```
+
+The plugin carries both pieces: the skill, which loads anywhere, and the MCP
+server, which runs locally so it loads in Claude Code and in desktop Cowork
+sessions. Chat uses the skill alone.
+
+**Claude Desktop, as a single file.** Download `ai-seo-toolkit.mcpb` from
+[releases](https://github.com/Bishwas-py/ai-seo-toolkit/releases) and
+double-click it. Use this when you want the server without the plugin.
+
+**Claude Code, server only.**
 
 ```bash
 claude mcp add ai-seo -- npx -y ai-seo-toolkit
@@ -39,7 +60,7 @@ claude mcp add ai-seo -- npx -y ai-seo-toolkit
 }
 ```
 
-**As a file-based skill.** Copy `ai-seo-toolkit/` into `~/.claude/skills/` (user
+**As a file-based skill.** Copy `skills/ai-seo-toolkit/` into `~/.claude/skills/` (user
 wide) or `.claude/skills/` (one project). No server, no install step; the client
 reads `SKILL.md` and loads `references/workflows.md` when a workflow applies.
 

@@ -1,0 +1,12 @@
+{
+  "name": "webmatrices",
+  "description": "SEO and AI-search tooling from Webmatrices, built on measured data rather than invented metrics.",
+  "owner": { "name": "Webmatrices", "url": "https://webmatrices.com" },
+  "plugins": [
+    {
+      "name": "ai-seo-toolkit",
+      "source": "./",
+      "description": "Eight SEO and AI-search workflows: Search Console audit, traffic drop diagnosis, keyword clustering, AI citations, competitor gap, content refresh, schema markup and article drafts."
+    }
+  ]
+}
