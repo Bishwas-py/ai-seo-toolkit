@@ -16,71 +16,24 @@ rather than invented numbers. MIT licensed.
 
 ## Install
 
-**As a plugin, recommended.** One install covers chat on web, desktop and
-mobile, Cowork, and Claude Code, and it updates itself from this repository.
-
-In claude.ai or the desktop app, go to **Customize > Plugins > Add > Add
+In claude.ai or the Claude desktop app, go to **Customize > Plugins > Add > Add
 marketplace** and enter:
 
 ```
 Bishwas-py/ai-seo-toolkit
 ```
 
-Or from Claude Code:
+Then select **AI SEO Toolkit** and **Add**.
+
+From Claude Code instead:
 
 ```bash
 /plugin marketplace add Bishwas-py/ai-seo-toolkit
 /plugin install ai-seo-toolkit@webmatrices
 ```
 
-The plugin carries both pieces: the skill, which loads anywhere, and the MCP
-server, which runs locally so it loads in Claude Code and in desktop Cowork
-sessions. Chat uses the skill alone.
-
-**Claude Desktop, as a single file.** Download `ai-seo-toolkit.mcpb` from
-[releases](https://github.com/Bishwas-py/ai-seo-toolkit/releases) and
-double-click it. Use this when you want the server without the plugin.
-
-**Claude Code, server only.**
-
-```bash
-claude mcp add ai-seo -- npx -y ai-seo-toolkit
-```
-
-**Codex, Cursor, Windsurf, Zed, VS Code.** Add a stdio MCP server:
-
-```json
-{
-  "mcpServers": {
-    "ai-seo": {
-      "command": "npx",
-      "args": ["-y", "ai-seo-toolkit"]
-    }
-  }
-}
-```
-
-**As a file-based skill.** Copy `skills/ai-seo-toolkit/` into `~/.claude/skills/` (user
-wide) or `.claude/skills/` (one project). No server, no install step; the client
-reads `SKILL.md` and loads `references/workflows.md` when a workflow applies.
-
-**In the browser.** The same workflows ship as a Chrome extension for claude.ai
-and chatgpt.com.
-
-## Two ways in, and why both exist
-
-The MCP server and the file-based skill carry the same eight workflows.
-
-The **server** is the one-click path and the only thing that works in Claude
-Desktop, where there is no filesystem to drop a skill into. It also exposes each
-workflow as a named command in the client UI.
-
-The **skill** is better in a coding agent, because the agent reads it as context
-and applies the rules while doing other work, rather than needing an explicit
-call.
-
-If you install both, prefer the skill and ignore the server's tools; they will
-otherwise say the same thing twice.
+That is the whole install. It covers chat on web, desktop and mobile, Cowork,
+and Claude Code from one account, and updates itself from this repository.
 
 ## Pair with MCP Browser
 
@@ -118,9 +71,10 @@ while the average cited page was around 500 days old.
 
 ```bash
 npm install
-npm test          # drives the real server over stdio
-npm start         # run the server directly
-npx @anthropic-ai/mcpb pack .   # rebuild the .mcpb
+npm test                             # drives the real server over stdio
+npm start                            # run the server directly
+claude --plugin-dir .                # load the plugin from this working copy
+claude plugin validate .             # check the manifest and components
 ```
 
 `server/workflows.js` is the single source of truth. Each workflow declares its
@@ -135,10 +89,14 @@ Pushing a tag is the whole release.
 npm version patch && git push --follow-tags
 ```
 
-That bumps `package.json`, mirrors the number into `manifest.json` through the
-`version` lifecycle hook, commits, tags, and pushes. CI then runs the tests,
-refuses to continue if the tag disagrees with `package.json`, publishes to npm,
-packs the `.mcpb` and attaches it to a GitHub release with generated notes.
+That bumps `package.json`, mirrors the number into `.claude-plugin/plugin.json`
+through the `version` lifecycle hook, commits, tags, and pushes. CI then runs
+the tests, refuses to continue if the tag disagrees with `package.json`,
+publishes the server to npm and cuts a GitHub release with generated notes.
+
+Installed plugins pick the new version up from this repository on their own.
+The npm package is what `.mcp.json` starts, so it is plumbing rather than
+something anyone installs by hand.
 
 There is no `NPM_TOKEN`. The workflow authenticates with
 [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/), which

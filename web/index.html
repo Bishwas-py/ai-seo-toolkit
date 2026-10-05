@@ -30,7 +30,7 @@
       "name": "SEO Toolkit by Webmatrices",
       "applicationCategory": "BusinessApplication",
       "applicationSubCategory": "SEO software",
-      "operatingSystem": "macOS, Windows, Linux",
+      "operatingSystem": "Web, macOS, Windows, Linux",
       "description": "Eight SEO and AI-search workflows for Claude and ChatGPT: Search Console audit, traffic drop diagnosis, keyword clustering, AI citation optimisation, competitor gap analysis, content refresh, schema markup and article drafts.",
       "url": "https://webmatrices.com/seo-toolkit",
       "softwareVersion": "1.0.0",
@@ -61,7 +61,7 @@
         {
           "@type": "Question",
           "name": "Which AI clients does it work with?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Claude Desktop installs it in one click from the .mcpb bundle. Claude Code, Codex, Cursor, Windsurf, Zed and VS Code add it as a standard MCP server. The browser extension covers claude.ai and chatgpt.com." }
+          "acceptedAnswer": { "@type": "Answer", "text": "One install covers them all. Adding the plugin to your Claude account makes it available in chat on web, desktop and mobile, in Cowork, and in Claude Code, with no second setup. A Chrome extension separately covers claude.ai and chatgpt.com with a toolbar above the chat box." }
         },
         {
           "@type": "Question",
@@ -165,10 +165,10 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
   <p class="lede">Eight workflows built on your own Search Console data instead of invented numbers. One click to install, free, open source.</p>
 
   <div class="cta">
-    <a class="btn btn-primary" href="/api/seo-toolkit/download">Download for Claude Desktop</a>
-    <a class="btn btn-ghost" href="https://github.com/bishwas-py/ai-seo-toolkit">View the source</a>
+    <a class="btn btn-primary" href="https://claude.ai/customize/plugins">Add to Claude</a>
+    <a class="btn btn-ghost" href="https://github.com/Bishwas-py/ai-seo-toolkit">View the source</a>
   </div>
-  <p class="note">3.7 MB <code>.mcpb</code> bundle. Double-click to install. No account, no API key.</p>
+  <p class="note">Customize &rsaquo; Plugins &rsaquo; Add marketplace &rsaquo; <code>Bishwas-py/ai-seo-toolkit</code>. No account, no API key.</p>
 </header>
 
 <h2>Most AI SEO tools make the numbers up</h2>
@@ -209,25 +209,18 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
 
 <h2>Install</h2>
 
-<h3>Claude Desktop, one click</h3>
-<p>Download the <code>.mcpb</code> bundle and double-click it. Claude Desktop shows the permissions, you confirm, done. You can also drag it onto the Claude window, or use Settings, Extensions, Advanced settings, Install Extension.</p>
+<p>In Claude, open <strong>Customize &rsaquo; Plugins</strong>, then <strong>Add &rsaquo; Add marketplace</strong>, and enter:</p>
 
-<h3>Claude Code</h3>
-<pre><code>claude mcp add ai-seo -- npx -y ai-seo-toolkit</code></pre>
+<pre><code>Bishwas-py/ai-seo-toolkit</code></pre>
 
-<h3>Codex, Cursor, Windsurf, Zed, VS Code</h3>
-<p>Add it as a standard stdio MCP server:</p>
-<pre><code>{
-  "mcpServers": {
-    "ai-seo": {
-      "command": "npx",
-      "args": ["-y", "ai-seo-toolkit"]
-    }
-  }
-}</code></pre>
+<p>Select <strong>AI SEO Toolkit</strong>, then <strong>Add</strong>. That is the whole thing. It covers chat on web, desktop and mobile, Cowork and Claude Code from one account, and updates itself.</p>
 
-<h3>claude.ai and chatgpt.com in the browser</h3>
-<p>The same workflows ship as a Chrome extension that adds a toolbar above the chat box. <a href="https://chromewebstore.google.com/detail/dfkmfiabefdpmncffbihnmnjjafkgnje">Get it from the Chrome Web Store.</a></p>
+<p>If you live in the terminal:</p>
+
+<pre><code>/plugin marketplace add Bishwas-py/ai-seo-toolkit
+/plugin install ai-seo-toolkit@webmatrices</code></pre>
+
+<p>Prefer a toolbar above the chat box on claude.ai and chatgpt.com? The same workflows ship as a <a href="https://chromewebstore.google.com/detail/dfkmfiabefdpmncffbihnmnjjafkgnje">Chrome extension</a>.</p>
 
 <h2>Pair it with MCP Browser</h2>
 
@@ -248,7 +241,7 @@ footer { margin:4rem 0; padding-top:1.5rem; border-top:1px solid var(--line); fo
 <p>From your own Google Search Console export, which is free and measured. The Search Console audit reads that file directly. Anywhere a figure cannot be retrieved it is labelled a guess.</p></details>
 
 <details><summary>Which AI clients does it work with?</summary>
-<p>Claude Desktop installs it in one click. Claude Code, Codex, Cursor, Windsurf, Zed and VS Code add it as a standard MCP server. The browser extension covers claude.ai and chatgpt.com.</p></details>
+<p>One install covers them all. Adding the plugin to your Claude account makes it available in chat on web, desktop and mobile, in Cowork, and in Claude Code, with no second setup. A Chrome extension separately covers claude.ai and chatgpt.com with a toolbar above the chat box.</p></details>
 
 <details><summary>What is the difference between this and an SEO prompt pack?</summary>
 <p>A prompt pack pastes text. These workflows must fetch a page and prove they read it before writing about it, separate measured numbers from guesses, and refuse to recommend tactics Google has publicly said do not work.</p></details>

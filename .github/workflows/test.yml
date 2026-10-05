@@ -15,6 +15,3 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm test
-      # The bundle is what people install, so a broken manifest should fail here
-      # rather than at someone's double-click.
-      - run: npx -y @anthropic-ai/mcpb@latest validate manifest.json

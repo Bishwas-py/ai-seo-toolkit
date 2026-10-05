@@ -142,15 +142,35 @@ await check('every workflow builds cleanly from its required arguments alone', a
 });
 
 // --- release hygiene. These drift silently and ship a bundle labelled wrong.
-await check('package.json and manifest.json agree on the version', async () => {
+await check('package.json and the plugin manifest agree on the version', async () => {
     const { readFileSync } = await import('node:fs');
     const read = (f) => JSON.parse(readFileSync(`${import.meta.dirname}/${f}`, 'utf8'));
     const pkg = read('package.json');
-    const manifest = read('manifest.json');
-    assert.strictEqual(manifest.version, pkg.version,
-        `manifest ${manifest.version} vs package ${pkg.version}`);
-    assert.strictEqual(manifest.name, pkg.name,
-        `manifest ${manifest.name} vs package ${pkg.name}`);
+    const plugin = read('.claude-plugin/plugin.json');
+    assert.strictEqual(plugin.version, pkg.version,
+        `plugin ${plugin.version} vs package ${pkg.version}`);
+    assert.strictEqual(plugin.name, pkg.name,
+        `plugin ${plugin.name} vs package ${pkg.name}`);
+});
+
+// A top-level bin/ directory silently blocks the plugin from installing on
+// claude.ai and in Cowork, and nothing warns you.
+await check('the plugin layout is intact', async () => {
+    const { existsSync, readFileSync } = await import('node:fs');
+    const here = import.meta.dirname;
+    assert.ok(!existsSync(`${here}/bin`), 'a top-level bin/ directory blocks claude.ai installs');
+    assert.ok(existsSync(`${here}/LICENSE`), 'the directory will not list a plugin without a licence');
+
+    const plugin = JSON.parse(readFileSync(`${here}/.claude-plugin/plugin.json`, 'utf8'));
+    const skill = readFileSync(`${here}/skills/${plugin.name}/SKILL.md`, 'utf8');
+    const front = /^---\n([\s\S]*?)\n---/.exec(skill);
+    assert.ok(front, 'SKILL.md has no frontmatter');
+    const name = /name:\s*(.+)/.exec(front[1])[1].trim();
+    assert.strictEqual(name, plugin.name, 'skill folder name must match its name field');
+
+    // The README is the directory listing, and it is rejected under 40 words.
+    const readme = readFileSync(`${here}/README.md`, 'utf8').replace(/```[\s\S]*?```/g, '');
+    assert.ok(readme.split(/\s+/).filter(Boolean).length >= 40, 'README too short to publish');
 });
 
 await check('the published package carries everything the server imports', async () => {

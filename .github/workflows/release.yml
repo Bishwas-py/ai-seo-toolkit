@@ -40,13 +40,10 @@ jobs:
       # publisher configured on the package, and attaches provenance itself.
       - run: npm publish
 
-      - run: npx -y @anthropic-ai/mcpb@latest pack . ai-seo-toolkit.mcpb
-
-      - name: Publish the release with the one-click bundle
+      - name: Cut the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" ai-seo-toolkit.mcpb \
+          gh release create "$GITHUB_REF_NAME" \
             --title "$GITHUB_REF_NAME" \
-            --generate-notes \
-            --notes-start-tag "$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo '')"
+            --generate-notes
