@@ -1,6 +1,6 @@
 {
   "name": "ai-seo-toolkit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Eight SEO and AI-search workflows for Claude and ChatGPT: Search Console audit, traffic drop diagnosis, keyword clustering, AI citations, competitor gap, content refresh, schema markup, article drafts.",
   "type": "module",
   "license": "MIT",
