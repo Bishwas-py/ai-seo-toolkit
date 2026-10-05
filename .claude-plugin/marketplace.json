@@ -1,5 +1,5 @@
 {
-  "name": "webmatrices",
+  "name": "webmatrices-seo",
   "description": "SEO and AI-search tooling from Webmatrices, built on measured data rather than invented metrics.",
   "owner": { "name": "Webmatrices", "url": "https://webmatrices.com" },
   "plugins": [

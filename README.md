@@ -29,12 +29,12 @@ From Claude Code instead:
 
 ```bash
 /plugin marketplace add Bishwas-py/ai-seo-toolkit
-/plugin install ai-seo-toolkit@webmatrices
+/plugin install ai-seo-toolkit@webmatrices-seo
 ```
 
 That is the whole install. It covers chat on web, desktop and mobile, Cowork,
 and Claude Code from one account. To pick up a new version later, run
-`/plugin update ai-seo-toolkit@webmatrices`, or turn on auto-update for the
+`/plugin update ai-seo-toolkit@webmatrices-seo`, or turn on auto-update for the
 marketplace.
 
 ## Pair with MCP Browser
