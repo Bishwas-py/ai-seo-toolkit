@@ -1,7 +1,7 @@
 {
   "name": "ai-seo-toolkit",
   "displayName": "AI SEO Toolkit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Audit a Google Search Console export, diagnose a traffic drop, cluster keywords, get cited by AI answers, analyse a competitor gap, refresh decaying content, write schema markup and draft articles. Built on measured data rather than invented metrics.",
   "author": {
     "name": "Webmatrices",

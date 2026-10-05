@@ -5,8 +5,21 @@ description: Use for any SEO or AI-search task - auditing a Search Console expor
 
 # SEO toolkit
 
-Eight workflows. Pick the one that matches the request, read its section in
-`references/workflows.md`, and follow it exactly.
+Eight workflows. Pick the one that matches the request, then get its procedure
+one of these two ways, and follow it exactly.
+
+**Call the workflow's tool on the `ai-seo` server.** It returns that workflow's
+whole procedure with your arguments already in it, so this is the first choice
+wherever the server is running, which is Claude Code and Cowork.
+
+**Otherwise read its section in `references/workflows.md`,** the file next to
+this one. Chat on the web runs the skill but not the server, so this is the
+path there. Read it with the skill's own files, not by building an absolute
+path out of the plugin and skill names.
+
+If neither is available, say so in one line and stop. Do not reconstruct a
+procedure from memory: the whole point of these workflows is that they are
+followed in a fixed order.
 
 | Ask | Workflow |
 |---|---|
