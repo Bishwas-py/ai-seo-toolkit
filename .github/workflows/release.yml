@@ -1,0 +1,52 @@
+name: release
+
+# Pushing a tag is the whole release. `npm version patch && git push --follow-tags`
+# bumps both files, tags, and hands off to this.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write   # create the release and attach the bundle
+  id-token: write   # OIDC, so npm needs no stored token
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      # Trusted publishing needs npm 11.5.1 or later; setup-node still ships 10.x.
+      - run: npm install -g npm@latest
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Refuse to release if the tag disagrees with package.json
+        run: |
+          tagged="${GITHUB_REF_NAME#v}"
+          packaged="$(node -p "require('./package.json').version")"
+          if [ "$tagged" != "$packaged" ]; then
+            echo "tag $tagged does not match package.json $packaged"
+            exit 1
+          fi
+
+      # No NPM_TOKEN. npm verifies the OIDC identity against the trusted
+      # publisher configured on the package, and attaches provenance itself.
+      - run: npm publish
+
+      - run: npx -y @anthropic-ai/mcpb@latest pack . ai-seo-toolkit.mcpb
+
+      - name: Publish the release with the one-click bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" ai-seo-toolkit.mcpb \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            --notes-start-tag "$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo '')"

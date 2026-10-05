@@ -13,7 +13,8 @@
   "scripts": {
     "start": "node server/index.js",
     "test": "node test.js",
-    "pack:mcpb": "mcpb pack"
+    "pack:mcpb": "npx -y @anthropic-ai/mcpb@latest pack . ai-seo-toolkit.mcpb",
+    "version": "node scripts/sync-version.mjs && git add manifest.json"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.0"
